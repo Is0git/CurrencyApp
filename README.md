@@ -35,7 +35,7 @@ Currencies API respones wasn't very convenient for ROOM/Sqlite(unless currency f
 
 
 
-//Motion layout bugs()
+<b>MOTION LAYOUT BUGS</b>
 
 FIX: dont use motion layout || update motion layout state when data is updated(slows down the performance)
 
