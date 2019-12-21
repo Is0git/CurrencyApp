@@ -56,4 +56,4 @@ BUGS:
 
 *Changing constraintLayout to alpha5 helps, but in release motion layout not as smooth and it creates other bugs(tried versions from alpha5 to beta4).
 
-*Without clicking ediText in the beginning, everything works fine.
+*Without clicking ediText in the first place, everything works fine.
