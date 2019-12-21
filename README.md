@@ -1,7 +1,7 @@
 # CurrencyApp
 
 
-CONCERNS
+<b>CONCERNS</B>
 
 
 Should I always calculate values again when actually converting because those values might have been changed
