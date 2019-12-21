@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.android.currencyAPP.data.database.entities.Conversion" />
+
+        <import type="android.text.Html" />
+
+        <import type="com.android.currencyAPP.data.database.entities.User" />
+
+        <import type="com.android.currencyAPP.R" />
+
+        <variable
+            name="currencyVm"
+            type="com.android.currencyAPP.ui.fragments.currency_converter_fragment.CurrencyFragmentViewModel" />
+
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/fragment_background_drawable">
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/waves_bg"
+                android:rotationX="180"
+                android:scaleX="1.5"
+                app:layout_constraintBottom_toTopOf="@id/view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/feeIcon"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/sendMoneyText"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/myriad_pro"
+                android:shadowColor="#94000000"
+                android:shadowDy="2"
+                android:shadowRadius="4"
+                android:text="@string/send_money"
+                android:textColor="@color/colorSurface"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/right_guideline"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="@+id/left_guideline"
+                app:layout_constraintTop_toTopOf="@+id/guideline4" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/freeFeesText"
+                style="@style/TextAppearance.MaterialComponents.Caption"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/myriad_pro"
+                android:shadowColor="#94000000"
+                android:shadowDy="3"
+                android:shadowRadius="4"
+                android:text="@{Html.fromHtml(context.getString(R.string.feesCount, currencyVm.userLiveData.feesLeft))}"
+                android:textAlignment="center"
+                android:textColor="@color/colorOnSurface"
+                app:layout_constraintEnd_toStartOf="@+id/right_guideline"
+                app:layout_constraintStart_toStartOf="@+id/left_guideline"
+                app:layout_constraintTop_toBottomOf="@id/sendMoneyText" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/sendText"
+                style="@style/TextAppearance.MaterialComponents.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/myriad_pro"
+                android:shadowColor="#94000000"
+                android:shadowDy="2"
+                android:shadowRadius="4"
+                android:text="@string/send"
+                android:textColor="@color/colorSurface"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/left_guideline"
+                app:layout_constraintTop_toBottomOf="@id/freeFeesText" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/sendTextInputLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/value"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toStartOf="@+id/firstCurrencyPicker"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="@+id/left_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/sendText">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/firstCurrencyEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/myriad_pro"
+                    android:inputType="numberDecimal"
+                    android:maxLength="10"
+                    android:shadowColor="@color/colorPrimaryDark"
+                    android:shadowDy="4"
+                    android:shadowRadius="3"
+                    android:singleLine="true"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:textColor="@color/colorSurface"
+                    android:textStyle="bold" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Spinner
+                android:id="@+id/firstCurrencyPicker"
+                style="@style/spinnerStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/currencies_array"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                app:flow_wrapMode="aligned"
+                app:layout_constraintBottom_toBottomOf="@+id/sendTextInputLayout"
+                app:layout_constraintEnd_toStartOf="@+id/firstCurrencyImage"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/sendTextInputLayout"
+                app:layout_constraintTop_toTopOf="@+id/sendTextInputLayout"
+                app:layout_constraintVertical_bias="0.571" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/firstCurrencyImage"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:src="@color/colorOnPrimary"
+                app:civ_border_color="@color/colorSurface"
+                app:civ_border_width="2dp"
+                app:layout_constraintBottom_toBottomOf="@+id/sendTextInputLayout"
+                app:layout_constraintEnd_toEndOf="@+id/divider"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/firstCurrencyPicker"
+                app:layout_constraintTop_toTopOf="@+id/sendText"
+                app:layout_constraintVertical_bias="1.0" />
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/left_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.05" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/right_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.95" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/divider_gradient"
+                app:layout_constraintEnd_toStartOf="@+id/exchangeButton"
+                app:layout_constraintStart_toStartOf="@id/left_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/sendTextInputLayout" />
+
+
+            <ImageView
+                android:id="@+id/spinIcon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/exchange_icon"
+                android:backgroundTint="@color/colorSurface"
+                android:elevation="21dp"
+                android:rotation="0"
+                tools:ignore="ContentDescription"
+                app:layout_constraintBottom_toBottomOf="@id/exchangeButton"
+                app:layout_constraintEnd_toEndOf="@id/exchangeButton"
+                app:layout_constraintStart_toStartOf="@id/exchangeButton"
+                app:layout_constraintTop_toTopOf="@id/exchangeButton" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/exchangeButton"
+                style="@style/exchangeButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:backgroundTint="@color/colorSecondaryVariant"
+                app:elevation="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/divider"
+                app:layout_constraintEnd_toStartOf="@+id/right_guideline"
+                app:layout_constraintTop_toTopOf="@+id/divider" />
+
+            <View
+                android:id="@+id/buttonGradient"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:background="@drawable/button_gradient_secondary_color"
+                android:elevation="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/exchangeButton"
+                app:layout_constraintEnd_toStartOf="@+id/right_guideline"
+                app:layout_constraintStart_toStartOf="@+id/spinIcon"
+                app:layout_constraintTop_toTopOf="@+id/exchangeButton" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/receiveText"
+                style="@style/TextAppearance.MaterialComponents.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/myriad_pro"
+                android:shadowColor="#94000000"
+                android:shadowDy="2"
+                android:shadowRadius="4"
+                android:text="@string/receive"
+                android:textColor="@color/colorSurface"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/left_guideline"
+                app:layout_constraintTop_toBottomOf="@id/divider" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/secondValueText"
+                style="@style/TextAppearance.MaterialComponents.Headline1"
+                android:layout_width="0dp"
+                android:layout_height="130sp"
+                android:lines="1"
+                android:text="@{currencyVm.conversionResult.received > 0 ? String.format(`+%.2f`, currencyVm.conversionResult.received) : String.format(`%.2f`, currencyVm.conversionResult.received), default = `0.00`}"
+                android:textColor="@color/colorSurface"
+                android:textStyle="bold"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintEnd_toStartOf="@+id/secondCurrencyPicker"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="@+id/left_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/receiveText"
+                app:shadowAdapter="@{currencyVm.conversionResult.received}" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/totalCostText"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:lines="1"
+                android:shadowColor="#94000000"
+                android:shadowDy="2"
+                android:shadowRadius="4"
+                android:text="@{currencyVm.conversionResult.cost > 0 ? String.format(`-%.2f`, currencyVm.conversionResult.cost) : String.format(`%.2f`, currencyVm.conversionResult.cost), default = `-5.12`}"
+                android:textColor="@{currencyVm.conversionResult.cost > 0 ? @color/design_default_color_error : @color/colorSurface}"
+                android:textStyle="bold"
+                app:autoSizeTextType="uniform"
+                app:fontFamily="@font/myriad_pro"
+                app:layout_constraintEnd_toStartOf="@+id/feeCostText"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toEndOf="@+id/costIcon"
+                app:layout_constraintTop_toBottomOf="@+id/secondCurrencyImage" />
+
+            <ImageView
+                android:id="@+id/costIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cost_icon"
+                tools:ignore="ContentDescription"
+                android:backgroundTint="@color/design_default_color_error"
+                app:layout_constraintEnd_toStartOf="@+id/totalCostText"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/view2"
+                app:layout_constraintStart_toStartOf="@+id/left_guideline"
+                app:layout_constraintTop_toTopOf="@+id/totalCostText" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/feeCostText"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:lines="1"
+                android:shadowColor="#94000000"
+                android:shadowDy="2"
+                android:shadowRadius="4"
+                android:text="@{currencyVm.conversionResult.fee > 0 ? String.format(`+%.2f`, currencyVm.conversionResult.fee) : String.format(`%.2f`, currencyVm.conversionResult.fee), default = `-5.12`}"
+                android:textAlignment="textEnd"
+                android:textColor="@{currencyVm.conversionResult.fee > 0 ? @color/colorOnPrimary : @color/colorSurface}"
+                android:textStyle="bold"
+                app:autoSizeTextType="uniform"
+                app:fontFamily="@font/myriad_pro"
+                app:layout_constraintBottom_toBottomOf="@+id/totalCostText"
+                app:layout_constraintEnd_toStartOf="@+id/feeIcon"
+                app:layout_constraintStart_toEndOf="@+id/totalCostText"
+                app:layout_constraintTop_toTopOf="@+id/totalCostText" />
+
+            <ImageView
+                android:id="@+id/feeIcon"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:background="@drawable/fee_icon_blue"
+                tools:ignore="ContentDescription"
+                android:backgroundTint="@color/colorAccent"
+                app:layout_constraintBottom_toBottomOf="@+id/costIcon"
+                app:layout_constraintEnd_toEndOf="@id/right_guideline"
+                app:layout_constraintTop_toTopOf="@+id/costIcon" />
+
+
+            <Spinner
+                android:id="@+id/secondCurrencyPicker"
+                style="@style/spinnerStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/currencies_array"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                app:layout_constraintBottom_toBottomOf="@+id/secondValueText"
+                app:layout_constraintEnd_toStartOf="@+id/secondCurrencyImage"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/secondValueText"
+                app:layout_constraintTop_toTopOf="@+id/secondValueText"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/secondCurrencyImage"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:src="@color/colorSecondary"
+                app:civ_border_color="@color/colorSurface"
+                app:civ_border_width="2dp"
+                app:layout_constraintBottom_toBottomOf="@+id/secondValueText"
+                app:layout_constraintEnd_toStartOf="@+id/right_guideline"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/secondCurrencyPicker"
+                app:layout_constraintTop_toTopOf="@+id/receiveText" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="120dp"
+                android:background="@drawable/black_white_gradient"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/costIcon" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/recentConversions"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:singleLine="true"
+                android:text="@string/recent_conversions"
+
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/recentTextIcon"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@+id/view"
+                app:layout_constraintStart_toStartOf="@+id/left_guideline"
+                app:layout_constraintTop_toTopOf="@+id/view" />
+
+
+            <ImageView
+                android:id="@+id/recentTextIcon"
+                android:layout_width="20dp"
+                android:layout_height="30dp"
+                android:background="@drawable/chavelor_right"
+                tools:ignore="ContentDescription"
+                app:layout_constraintBottom_toBottomOf="@+id/recentConversions"
+                app:layout_constraintEnd_toStartOf="@+id/countText"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/recentConversions"
+                app:layout_constraintTop_toTopOf="@+id/recentConversions" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/countText"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:shadowColor="@color/colorOnSurface"
+                android:shadowDy="2"
+                android:shadowRadius="4"
+                android:singleLine="true"
+                android:text="@string/_0"
+                android:textColor="@color/colorOnSurface"
+                android:textStyle="bold"
+                app:fontFamily="@font/myriad_pro"
+                app:layout_constraintBottom_toBottomOf="@+id/recentConversions"
+                app:layout_constraintEnd_toStartOf="@+id/itemsIcon"
+                app:layout_constraintTop_toTopOf="@+id/recentConversions"
+                app:layout_constraintVertical_bias="0.0" />
+
+
+            <ImageView
+                android:id="@+id/itemsIcon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/items_icon"
+                android:backgroundTint="@color/colorOnPrimary"
+                tools:ignore="ContentDescription"
+                app:layout_constraintBottom_toBottomOf="@+id/countText"
+                app:layout_constraintEnd_toStartOf="@+id/right_guideline"
+                app:layout_constraintTop_toTopOf="@+id/countText" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/latestConversionsList"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintBottom_toTopOf="@+id/extendCardGuideline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recentDivider"
+                app:layout_constraintVertical_bias="0.0"
+                app:spanCount="2"
+                tools:listitem="@layout/recent_convertions_list" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/extendCardGuideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_end="25dp" />
+
+            <View
+                android:id="@+id/recentDivider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/divider_gradient2"
+                app:layout_constraintEnd_toEndOf="@id/right_guideline"
+                app:layout_constraintStart_toStartOf="@+id/left_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/recentConversions" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

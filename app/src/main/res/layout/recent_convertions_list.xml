@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.android.currencyAPP.util.data_binding.CostFormatKt" />
+
+        <import type="com.android.currencyAPP.util.data_binding.TimeResolver" />
+
+        <variable
+            name="conversion"
+            type="com.android.currencyAPP.data.database.entities.Conversion" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="150dp">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/conversionCard"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline2"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/firstPrice"
+                    style="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/myriad_pro"
+                    android:lines="1"
+                    android:text="@{CostFormatKt.costFormat(conversion.send), default = `0.00`}"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorOnPrimary"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/exchangeIcon"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/exchangeIcon"
+                    android:layout_width="20sp"
+                    android:layout_height="20dp"
+                    tools:ignore="ContentDescription"
+                    android:background="@drawable/exchange_icon_balance"
+                    app:layout_constraintBottom_toBottomOf="@+id/firstPrice"
+                    app:layout_constraintEnd_toStartOf="@+id/secondPrice"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/firstPrice"
+                    app:layout_constraintTop_toTopOf="@+id/firstPrice" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/secondPrice"
+                    style="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/myriad_pro"
+                    android:lines="1"
+                    android:text="@{CostFormatKt.costFormat(conversion.received), default = `0.00`}"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/colorPrimaryVariant"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/exchangeIcon"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/exchangeIcon"
+                    app:layout_constraintTop_toTopOf="@+id/exchangeIcon" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/firstCurrencyType"
+                    style="@style/TextAppearance.MaterialComponents.Body1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/myriad_pro"
+                    android:text="@{conversion.fromType, default = `N/A`}"
+                    android:textColor="@color/colorOnSurface"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/secondCurrencyType"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toStartOf="@+id/firstPrice"
+                    app:layout_constraintTop_toBottomOf="@+id/exchangeIcon" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/secondCurrencyType"
+                    style="@style/TextAppearance.MaterialComponents.Body1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/myriad_pro"
+                    android:text="@{conversion.toType, default = `N/A`}"
+                    android:textColor="@color/colorOnSurface"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/firstCurrencyType"
+                    app:layout_constraintEnd_toEndOf="@+id/secondPrice"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/firstCurrencyType"
+                    app:layout_constraintTop_toTopOf="@+id/firstCurrencyType" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/timeAgo"
+                    style="@style/TextAppearance.MaterialComponents.Caption"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/myriad_pro"
+                    android:text="@{TimeResolver.getTimeAgo(conversion.dateLong), default = `N/A`}"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorOnSurface"
+                    android:textStyle="bold"
+                    app:fontFamily="@font/myriad_pro"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/secondCurrencyType"
+                    app:layout_constraintStart_toStartOf="@+id/firstCurrencyType"
+                    app:layout_constraintTop_toBottomOf="@+id/firstCurrencyType" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

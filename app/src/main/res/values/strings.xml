@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">Currency Converter</string>
+    <string name="empty_double_value">0.00</string>
+    <!--    <string name="conversion_success">You <font color="#f65a5b"> have converted</font> <b>%.2f %s</b> to <b>%.2f %s</b>. Commission Fee - <b>%.2f %s</b></string>-->
+
+    <string name="conversion_success"><![CDATA[
+ You have converted <b>%.2f %s</b> to <b>%.2f %s</b>. Commission Fee - <b>%.2f %s</b>
+]]></string>
+    <string name="success">Success!</string>
+    <string name="feesCount"><![CDATA[
+    You have <b>%d</b> fees left
+    ]]></string>
+    <string name="receive">Receive</string>
+    <string name="value">Value</string>
+    <string name="send">Send</string>
+    <string name="send_money">Send Money</string>
+    <string name="count"><![CDATA[
+    <b><font color="#ffffff">%d</font></b>
+]]></string>
+    <string name="recent_conversions">RECENT</string>
+    <string name="minusValue">-%.2f</string>
+    <string name="balanceEur"><![CDATA[
+ <b><font color="#fe8b39">%.2f€</font></b>
+]]></string>
+    <string name="_0">0</string>
+    <string name="n_a">N/A</string>
+
+
+    <string name="HKD">Hong Kong dollar</string>
+    <string name="CAD">Canadian dollar</string>
+    <string name="ISK">Icelandic króna</string>
+    <string name="PHP">Philippine peso</string>
+    <string name="DKK">Danish krone</string>
+    <string name="HUF">Hungarian forint</string>
+    <string name="CZK">Czech koruna</string>
+    <string name="AUD">Australian dollar</string>
+    <string name="RON">Romanian leu</string>
+    <string name="SEK">Swedish krona</string>
+    <string name="IDR">Indonesian rupiah</string>
+    <string name="INR">Indian rupee</string>
+    <string name="BRL">Brazilian real</string>
+    <string name="RUB">Russian ruble</string>
+    <string name="HRK">Croatian kuna</string>
+    <string name="JPY">Japanese yen</string>
+    <string name="THB">Thai baht</string>
+    <string name="CHF">Swiss franc</string>
+    <string name="SGD">Singapore dollar</string>
+    <string name="PLN">Polish złoty</string>
+    <string name="BGN">Bulgarian lev</string>
+    <string name="TRY">Turkish lira</string>
+    <string name="CNY">Renminbi</string>
+    <string name="NOK">Norwegian krone</string>
+    <string name="ZAR">South African rand</string>
+    <string name="USD">United States dollar</string>
+    <string name="MXN">Mexican peso</string>
+    <string name="ILS">ILS currency</string>
+    <string name="KRW">South Korean won</string>
+    <string name="MYR">Malaysian ringgit</string>
+    <string name="NZD">New Zealand dollar</string>
+    <string name="GBP">English pound</string>
+    <string name="_0_00">0.00€</string>
+    <string name="balance">BALANCE</string>
+    <string name="name">currencyName</string>
+
+
+</resources>

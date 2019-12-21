@@ -1,0 +1,73 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorOnPrimary</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorOnSecondary">@color/colorSecondary</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="android:colorBackground">@color/colorBackground</item>
+        <item name="spinnerDropDownItemStyle">@style/spinnerItemStyle</item>
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="toolbarAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">0sp</item>
+    </style>
+
+    <style name="exchangeButtonStyle">
+        <item name="shapeAppearanceOverlay">@style/exchangeButtonShape</item>
+    </style>
+
+    <style name="exchangeButtonShape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerFamilyTopLeft">cut</item>
+        <item name="cornerFamilyBottomLeft">cut</item>
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSize">25dp</item>
+    </style>
+
+    <style name="balanceCardStyle">
+        <item name="shapeAppearanceOverlay">@style/balanceCardShape</item>
+    </style>
+
+    <style name="balanceCardShape" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">20dp</item>
+        <item name="cornerSizeTopRight">20dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
+    <style name="spinnerStyle" parent="Widget.AppCompat.Light.DropDownItem.Spinner">
+        <item name="android:popupBackground">@color/colorSurface</item>
+        <item name="backgroundTint">@color/colorSecondary</item>
+    </style>
+
+    <style name="convertMaterialDialogStyle" parent="ThemeOverlay.MaterialComponents.Dialog">
+        <item name="materialAlertDialogTitleTextStyle">@style/titleTextStyle</item>
+        <item name="colorOnSurface">@color/convertMaterialMessageColor</item>
+
+
+    </style>
+
+    <style name="titleTextStyle" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="fontFamily">@font/myriad_pro</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorSecondary</item>
+
+    </style>
+
+    <style name="spinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
+        <item name="android:textColor">@color/colorSurface</item>
+    </style>
+
+</resources>

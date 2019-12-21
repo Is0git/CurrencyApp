@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="Balance"
+            type="com.android.currencyAPP.data.database.entities.Balance" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/balanceCardView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:backgroundTint="@color/colorSecondary"
+            android:minHeight="200dp"
+            android:orientation="vertical"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha="0.05"
+                    tools:ignore="ContentDescription"
+                    android:background="@drawable/paysera_letter"
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:layout_editor_absoluteY="0dp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/currencyName"
+                    style="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/myriad_pro"
+                    android:shadowColor="#94000000"
+                    android:shadowDy="2"
+                    android:shadowRadius="4"
+                    android:text="@string/name"
+                    android:textColor="@color/design_default_color_surface"
+                    app:layout_constraintBottom_toTopOf="@+id/currencyImage"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/imageView3"
+                    app:layout_constraintVertical_bias="0.48000002"
+                    app:layout_constraintVertical_chainStyle="spread_inside" />
+
+                <ImageView
+                    android:id="@+id/currencyImage"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    tools:ignore="ContentDescription"
+                    app:layout_constraintBottom_toTopOf="@+id/valueText"
+                    app:layout_constraintEnd_toEndOf="@+id/currencyName"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/currencyName"
+                    app:layout_constraintTop_toBottomOf="@+id/currencyName"
+                    app:resolveImage="@{Balance.type}"
+                    app:resolveText="@{currencyName}" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/currencyShortName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@{Balance.type}"
+                    android:textColor="@color/colorSurface"
+                    app:layout_constraintBottom_toBottomOf="@+id/currencyImage"
+                    app:layout_constraintStart_toEndOf="@+id/currencyImage"
+                    app:layout_constraintTop_toTopOf="@+id/currencyImage" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/valueText"
+                    style="@style/TextAppearance.MaterialComponents.Headline4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:fontFamily="@font/myriad_pro"
+                    android:lines="1"
+                    android:shadowColor="#94000000"
+                    android:shadowDy="2"
+                    android:shadowRadius="4"
+                    android:text="@{String.format(`%.2f`, Balance.balanceValue), default = `0.00`}"
+                    android:textColor="@color/colorSurface"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/currencyName"
+                    app:layout_constraintTop_toBottomOf="@+id/currencyImage"
+                    app:layout_constraintVertical_bias="1.0" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
