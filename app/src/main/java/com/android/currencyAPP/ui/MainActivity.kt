@@ -23,60 +23,19 @@ class MainActivity : DaggerAppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    @Inject
-    lateinit var balancesAdapter: BalancesAdapter
-
-    lateinit var viewModel: MainActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        viewModel =
-            ViewModelProviders.of(this, viewModelFactory).get(MainActivityViewModel::class.java)
         navController = findNavController(R.id.main_fragment_container)
 //        setupTopAppBar() // toolbar is not needed for now
-        setupViewPagerWithTabs()
-        handleObservers()
-        binding.sparkview.adapter = SparkViewAdapter()
 
     }
 
-    private fun setupViewPagerWithTabs() {
-        binding.balancesViewPager.apply {
-            setPageTransformer(ZoomOutPageTransformer())
-            adapter = balancesAdapter
-            TabLayoutMediator(binding.tabLayout, binding.balancesViewPager, true) { tab, position ->
-                tab.text = balancesAdapter.currentList[position].type
-            }.attach()
-        }
-    }
 
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        if (savedInstanceState.getBoolean("isTransitionEnd")) binding.constraintLayout.transitionToEnd()
-        super.onRestoreInstanceState(savedInstanceState)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.putBoolean("isTransitionEnd", binding.constraintLayout.currentState == R.id.end)
-        super.onSaveInstanceState(outState)
-
-    }
 //    private fun setupTopAppBar() {
 //        setSupportActionBar(binding.toolbar)
 //        binding.toolbar.setupWithNavController(navController)
 //    }
-
-    private fun handleObservers() {
-        viewModel.balancesLiveData.observe(this, Observer { balanceList ->
-            balancesAdapter.submitList(balanceList)
-            binding.balanceValue.text = Html.fromHtml(
-                getString(
-                    R.string.balanceEur,
-                    balanceList.find { it.type == BASE_CURRENCY }?.balanceValue
-                )
-            )
-        })
-    }
 
 }

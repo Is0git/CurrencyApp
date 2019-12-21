@@ -11,9 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.currencyAPP.data.database.entities.Balance
 import com.android.currencyAPP.databinding.BalancesItemLayoutBinding
 import com.android.currencyAPP.di.activity.MainActivityScope
+import com.android.currencyAPP.di.activity.currency_fragment.CurrencyFragmentScope
 import javax.inject.Inject
 
-@MainActivityScope
+@CurrencyFragmentScope
 class BalancesAdapter @Inject constructor() : ListAdapter<Balance, BalancesAdapter.MyViewHolder>(
     asyncDiffer
 ) {

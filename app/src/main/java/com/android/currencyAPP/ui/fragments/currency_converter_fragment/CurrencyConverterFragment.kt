@@ -24,14 +24,13 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import com.android.currencyAPP.R
 import com.android.currencyAPP.databinding.ConverterFragmentBinding
+import com.android.currencyAPP.ui.BalancesAdapter
 import com.android.currencyAPP.ui.MainActivity
 import com.android.currencyAPP.ui.MainActivityViewModel
-import com.android.currencyAPP.util.ConverterAction
-import com.android.currencyAPP.util.ConverterState
+import com.android.currencyAPP.util.*
 import com.android.currencyAPP.util.DialogBuilder.showDialog
 import com.android.currencyAPP.util.FocusHelper.hideKeyboard
-import com.android.currencyAPP.util.ImageLoaderHelper
-import com.android.currencyAPP.util.ViewModelFactory
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.converter_fragment.*
 import kotlinx.coroutines.Dispatchers
@@ -42,13 +41,16 @@ import javax.inject.Inject
 
 
 @Suppress("DEPRECATION")
-class CurrencyConverterFragment : DaggerFragment(), AdapterView.OnItemSelectedListener,
-    NestedScrollView.OnScrollChangeListener {
+class CurrencyConverterFragment : DaggerFragment(), AdapterView.OnItemSelectedListener {
     lateinit var binding: ConverterFragmentBinding
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     @Inject
     lateinit var conversionsAdapter: ConversionListAdapter
+
+    @Inject
+    lateinit var balancesAdapter: BalancesAdapter
+
     lateinit var currencyViewModel: CurrencyFragmentViewModel
 
     var sendSpinnerAdapter: ArrayAdapter<String>? = null
@@ -68,6 +70,7 @@ class CurrencyConverterFragment : DaggerFragment(), AdapterView.OnItemSelectedLi
         setupViewModels()
         setupBinding(inflater, container)
         handleObservers()
+        setupViewPagerWithTabs()
         handleReceiver()
         setAnimations()
         setDecorates()
@@ -98,7 +101,6 @@ class CurrencyConverterFragment : DaggerFragment(), AdapterView.OnItemSelectedLi
             currencyVm = currencyViewModel
             latestConversionsList.adapter = conversionsAdapter
             exchangeButton.setOnClickListener { convert() }
-            nestedScrollView.setOnScrollChangeListener(this@CurrencyConverterFragment)
 
 
         }
@@ -174,6 +176,15 @@ class CurrencyConverterFragment : DaggerFragment(), AdapterView.OnItemSelectedLi
 
 
 
+        activityViewModel.balancesLiveData.observe(viewLifecycleOwner, Observer { balanceList ->
+            balancesAdapter.submitList(balanceList)
+            binding.balanceValue.text = Html.fromHtml(
+                getString(
+                    R.string.balanceEur,
+                    balanceList.find { it.type == BASE_CURRENCY }?.balanceValue
+                )
+            )
+        })
         currencyViewModel.convertStates.observe(viewLifecycleOwner, Observer {
             //Conversions states observer
             when (it) {
@@ -356,25 +367,17 @@ class CurrencyConverterFragment : DaggerFragment(), AdapterView.OnItemSelectedLi
         }
         super.onActivityCreated(savedInstanceState)
     }
-
-    override fun onScrollChange(
-        v: NestedScrollView?,
-        scrollX: Int,
-        scrollY: Int,
-        oldScrollX: Int,
-        oldScrollY: Int
-    ) {
-        (activity!! as MainActivity).binding.constraintLayout.updateState()
-        if (binding.firstCurrencyEditText.isFocused) binding.firstCurrencyEditText.apply {
-            clearFocus()
-
-            hideKeyboard(
-                this@CurrencyConverterFragment.activity!!,
-                this
-            ) // lose focus and hide keyboard on click
+    private fun setupViewPagerWithTabs() {
+        binding.balancesViewPager.apply {
+            setPageTransformer(ZoomOutPageTransformer())
+            adapter = balancesAdapter
+            TabLayoutMediator(binding.tabLayout, binding.balancesViewPager, true) { tab, position ->
+                tab.text = balancesAdapter.currentList[position].type
+            }.attach()
         }
-
     }
+
+
 
 }
 

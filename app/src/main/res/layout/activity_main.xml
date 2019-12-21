@@ -4,14 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
-    <androidx.constraintlayout.motion.widget.MotionLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/activity_background_gradient"
-        app:applyMotionScene="true"
-        app:layoutDescription="@xml/activity_main_xml_constraintlayout_scene">
-
+        android:background="@drawable/activity_background_gradient">
 
         <!--        <androidx.appcompat.widget.Toolbar-->
         <!--            android:id="@+id/toolbar"-->
@@ -26,7 +23,6 @@
         <!--            app:layout_constraintTop_toTopOf="parent"-->
         <!--            app:titleTextColor="@color/colorOnSurface" />-->
 
-
         <fragment
             android:id="@+id/main_fragment_container"
             android:name="androidx.navigation.fragment.NavHostFragment"
@@ -37,159 +33,6 @@
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="0dp"
             tools:ignore="FragmentTagUsage" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/fragmentCard"
-            style="@style/balanceCardStyle"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:backgroundTint="@color/colorBalanceCard"
-            android:outlineProvider="background"
-            app:cardElevation="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:strokeColor="@color/colorOnPrimary"
-            app:strokeWidth="1dp">
-
-            <Button
-                android:id="@+id/swipeButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="50dp"
-                android:alpha="0"
-                android:elevation="15dp" />
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.robinhood.spark.SparkView
-            android:id="@+id/sparkview"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/center_guideline"
-            app:layout_constraintTop_toTopOf="parent"
-            app:spark_lineColor="@color/colorAccent" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/balanceText"
-            style="@style/TextAppearance.MaterialComponents.Body2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:elevation="10dp"
-            android:fontFamily="@font/myriad_pro"
-            android:gravity="center_vertical"
-            android:shadowColor="#94000000"
-            android:shadowDy="2"
-            android:shadowRadius="4"
-            android:singleLine="true"
-            android:text="@string/balance"
-            android:textColor="@color/colorSurface"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/arrowIcon"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/fragmentCard"
-            app:layout_constraintStart_toStartOf="@+id/fragmentCard"
-            app:layout_constraintTop_toTopOf="@+id/fragmentCard" />
-
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/balanceValue"
-            style="@style/TextAppearance.MaterialComponents.Body2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            android:elevation="10dp"
-            android:fontFamily="@font/myriad_pro"
-            android:gravity="center_vertical"
-            android:shadowColor="#94000000"
-            android:shadowDy="2"
-            android:shadowRadius="4"
-            android:text="@string/_0_00"
-            android:textAlignment="textEnd"
-            android:textColor="@color/colorSurface"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/fragmentCard"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/arrowIcon"
-            app:layout_constraintTop_toTopOf="@+id/fragmentCard"
-            tools:ignore="RtlCompat" />
-
-        <ImageView
-            android:id="@+id/arrowIcon"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:background="@drawable/up_icon"
-            android:elevation="10dp"
-            tools:ignore="ContentDescription"
-            app:layout_constraintBottom_toTopOf="@+id/balanceText"
-            app:layout_constraintEnd_toStartOf="@+id/balanceValue"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/balanceText"
-            app:layout_constraintTop_toTopOf="@+id/fragmentCard" />
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
-            style="@style/Widget.MaterialComponents.TabLayout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@android:color/transparent"
-            android:elevation="12dp"
-            android:outlineProvider="none"
-            app:layout_constraintBottom_toTopOf="@+id/balancesViewPager"
-            app:layout_constraintEnd_toEndOf="@+id/fragmentCard"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/fragmentCard"
-            app:layout_constraintTop_toBottomOf="@+id/balanceValue"
-            app:tabIndicatorFullWidth="false"
-            app:tabInlineLabel="true"
-            app:tabMode="scrollable" />
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/balancesViewPager"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:elevation="12dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/fragmentCard"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/fragmentCard"
-            app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
-
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/center_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.40" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/chartConstraintTop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.10" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/chartConstraintBottom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.30" />
-
-    </androidx.constraintlayout.motion.widget.MotionLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
