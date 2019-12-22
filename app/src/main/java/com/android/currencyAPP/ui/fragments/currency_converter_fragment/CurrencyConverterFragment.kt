@@ -133,6 +133,7 @@ class CurrencyConverterFragment : DaggerFragment(), AdapterView.OnItemSelectedLi
     private fun handleReceiver() {
         binding.apply {
             firstCurrencyEditText.addTextChangedListener {
+                (activity!! as MainActivity).binding.constraintLayout.updateState()
                 updateReceiver(it)
             }
         }
