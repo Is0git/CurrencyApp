@@ -58,6 +58,7 @@
     <string name="MYR">Malaysian ringgit</string>
     <string name="NZD">New Zealand dollar</string>
     <string name="GBP">English pound</string>
+    <string name="EUR">Euro</string>
     <string name="_0_00">0.00€</string>
     <string name="balance">BALANCE</string>
     <string name="name">currencyName</string>

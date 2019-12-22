@@ -91,7 +91,7 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/valueText"
                     style="@style/TextAppearance.MaterialComponents.Headline4"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="24dp"
                     android:fontFamily="@font/myriad_pro"
@@ -101,8 +101,8 @@
                     android:shadowRadius="4"
                     android:text="@{String.format(`%.2f`, Balance.balanceValue), default = `0.00`}"
                     android:textColor="@color/colorSurface"
-                    app:autoSizeTextType="uniform"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/currencyName"
                     app:layout_constraintTop_toBottomOf="@+id/currencyImage"
                     app:layout_constraintVertical_bias="1.0" />

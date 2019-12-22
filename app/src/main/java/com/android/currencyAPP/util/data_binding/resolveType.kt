@@ -42,6 +42,7 @@ object TypeResolver {
             "KRW" -> setCardProperty(text, imageView, R.drawable.won_icon, R.string.KRW)
             "MYR" -> setCardProperty(text, imageView, R.drawable.money_icon, R.string.MYR)
             "GBP" -> setCardProperty(text, imageView, R.drawable.pound_icon, R.string.GBP)
+            "EUR" -> setCardProperty(text, imageView, R.drawable.euro_icon, R.string.EUR)
 
         }
     }
