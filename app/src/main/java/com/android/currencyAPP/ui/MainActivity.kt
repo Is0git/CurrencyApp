@@ -2,6 +2,7 @@ package com.android.currencyAPP.ui
 
 import android.os.Bundle
 import android.text.Html
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -10,6 +11,7 @@ import androidx.navigation.findNavController
 import com.android.currencyAPP.R
 import com.android.currencyAPP.databinding.ActivityMainBinding
 import com.android.currencyAPP.ui.fragments.currency_converter_fragment.BASE_CURRENCY
+import com.android.currencyAPP.util.LoadingStates
 import com.android.currencyAPP.util.ViewModelFactory
 import com.android.currencyAPP.util.ZoomOutPageTransformer
 import com.google.android.material.tabs.TabLayoutMediator
@@ -77,6 +79,24 @@ class MainActivity : DaggerAppCompatActivity() {
                 )
             )
         })
+
+        viewModel.loadingStates.observe(this, Observer {
+            when(it) {
+                LoadingStates.START -> showLoadingScreen()
+                LoadingStates.FAILED -> hideLoadingScreen()
+                LoadingStates.FINISH -> hideLoadingScreen()
+                else -> hideLoadingScreen()
+            }
+        })
     }
 
+    private fun showLoadingScreen() {
+        binding.progressBarContainer.visibility = View.VISIBLE
+        binding.spinKit.visibility = View.VISIBLE
+    }
+
+    private fun hideLoadingScreen() {
+        binding.progressBarContainer.visibility = View.INVISIBLE
+        binding.spinKit.visibility = View.INVISIBLE
+    }
 }

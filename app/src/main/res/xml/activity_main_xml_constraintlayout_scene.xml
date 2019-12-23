@@ -54,6 +54,24 @@
 
 
         <Constraint
+            android:id="@+id/progressBarContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            motion:visibilityMode="ignore"
+            android:background="@drawable/activity_background_gradient"/>
+
+        <Constraint
+            android:id="@id/spinKit"
+            style="@style/SpinKitView.Large.ThreeBounce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:visibilityMode="ignore"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_gravity="center" />
+        <Constraint
             android:id="@+id/balanceValue"
             android:layout_width="0dp"
             android:layout_height="40dp"

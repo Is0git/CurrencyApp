@@ -15,7 +15,7 @@ class MainActivityViewModel @Inject constructor(val repo: MainActivityRepository
             repo.updateCurrencyDb()
         }
     }
-
+    var loadingStates = repo.loadingStatesLiveData
     fun addFees(userId: Int, feesNumber: Int) =
         viewModelScope.launch(Dispatchers.IO) { repo.addFees(userId, feesNumber) }
 

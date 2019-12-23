@@ -3,6 +3,7 @@ package com.android.currencyAPP.ui
 import android.app.Application
 import android.widget.Toast
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.work.Constraints
 import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequestBuilder
@@ -15,6 +16,7 @@ import com.android.currencyAPP.data.network.models.Currency
 import com.android.currencyAPP.di.activity.MainActivityScope
 import com.android.currencyAPP.ui.fragments.currency_converter_fragment.BASE_CURRENCY
 import com.android.currencyAPP.util.CurrenciesSyncWorker
+import com.android.currencyAPP.util.LoadingStates
 import kotlinx.coroutines.*
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -35,6 +37,7 @@ class MainActivityRepository @Inject constructor(
 ) {
     var service = retrofit.create(CurrencyService::class.java)
     var dao = db.currencyDao()
+    var loadingStatesLiveData = MutableLiveData<LoadingStates>()
 
 
     init {
@@ -60,14 +63,19 @@ class MainActivityRepository @Inject constructor(
     }
 
     suspend fun updateCurrencyDb(initialBalance: Double = INITIAL_BALANCE) = coroutineScope {
+        loadingStatesLiveData.postValue(LoadingStates.START)
         var result: Response<Currency>? = null
         try {
             result = service.getCurrencies()
         } catch (e: IOException) {
+            loadingStatesLiveData.postValue(LoadingStates.FAILED)
             Toast.makeText(application, "Connect to internet", Toast.LENGTH_LONG).show()
         }
 
-        if (result == null) throw CancellationException("currency result null")
+        if (result == null) {
+            loadingStatesLiveData.postValue(LoadingStates.FAILED)
+            throw CancellationException("currency result null")
+        }
         val map = when {
             result.isSuccessful -> result.body()?.rates
             !result.isSuccessful -> throw CancellationException(result.message())
@@ -91,7 +99,9 @@ class MainActivityRepository @Inject constructor(
                         )
                     )
                 }
+
             }
         }
+        loadingStatesLiveData.postValue(LoadingStates.FINISH)
     }
 }
