@@ -1,11 +1,6 @@
 # CurrencyApp
 
 
-<h1><a href='https://streamable.com/apqkc' target='_blank'>DEMO</a></h1>
-
-
-
-
 <b>MOTION LAYOUT BUGS</b>
 
 FIX: dont use motion layout || update motion layout state when data is updated(slows down the performance)
