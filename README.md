@@ -3,6 +3,33 @@
 
 <h1><a href='https://streamable.com/apqkc' target='_blank'>DEMO</a></h1>
 
+
+
+
+<b>MOTION LAYOUT BUGS</b>
+
+FIX: dont use motion layout || update motion layout state when data is updated(slows down the performance)
+
+BUGS:
+1.NestedscrollView in motion layout  acts weird and makes regionId view unclickable, fast fix is too add clickableView on top. 
+
+2.When I click on editTextt in the fragment it prevents updating my lists (recyclerView, and spinners items). Adapters data gets updated but UI does not.
+
+*For recyclerView smoothScrollPosition helps if it is possible to scroll
+
+*Losing edit text focus and hiding keyboard doesn't help
+
+*Spinners onItemSelected method does not get triggered.
+
+*EditText is bugged, when user typed text that goes beyond view bounds, ediText doesn't scroll.
+
+*Swapping Motion layout to constraint layout completely fixes all problems.
+
+*Changing constraintLayout to alpha5 helps, but in release motion layout not as smooth and it creates other bugs(tried versions from alpha5 to beta4).
+
+*Without clicking ediText in the first place, everything works fine.
+
+
 <b>CONCERNS</B>
 
 
@@ -35,28 +62,3 @@ Currencies API respones wasn't very convenient for ROOM/Sqlite(unless currency f
 * converted response to map with moshi adapter
 
 * couldn't create adapter to convert from object with objects to list with custom objects(containing type, value fields).
-
-
-
-<b>MOTION LAYOUT BUGS</b>
-
-FIX: dont use motion layout || update motion layout state when data is updated(slows down the performance)
-
-BUGS:
-1.NestedscrollView in motion layout  acts weird and makes regionId view unclickable, fast fix is too add clickableView on top. 
-
-2.When I click on editTextt in the fragment it prevents updating my lists (recyclerView, and spinners items). Adapters data gets updated but UI does not.
-
-*For recyclerView smoothScrollPosition helps if it is possible to scroll
-
-*Losing edit text focus and hiding keyboard doesn't help
-
-*Spinners onItemSelected method does not get triggered.
-
-*EditText is bugged, when user typed text that goes beyond view bounds, ediText doesn't scroll.
-
-*Swapping Motion layout to constraint layout completely fixes all problems.
-
-*Changing constraintLayout to alpha5 helps, but in release motion layout not as smooth and it creates other bugs(tried versions from alpha5 to beta4).
-
-*Without clicking ediText in the first place, everything works fine.
