@@ -8,7 +8,12 @@
   </p>
 
 <h3>Description</h3>
-<p>An app that allows to transfer and collect payments using pretty much all currencies in the world which are updated and synchronized every minute.</p>
+<p>An app that allows to transfer and collect payments using pretty much all currencies in the world which are updated and synchronized every minute. (MVVM + Dagger + Architecture components)</p>
+
+<h3> Tests </h3>
+<p>
+   JUnit, instrumental tests, robolectric, mockito, espresso.
+   </pi>
 <h3> Libraries </h3>
 <p>
   <li>Kotlin coroutines</li> 
